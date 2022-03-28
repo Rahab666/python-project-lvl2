@@ -2,32 +2,39 @@ import json
 import copy
 
 
-def generate_diff_json(first_file, second_file):
+def key_sorting(first_dict, second_dict):
+
+    first_keys = list(first_dict.keys())
+    second_keys = list(second_dict.keys())
+    all_keys = copy.deepcopy(first_keys)
+    first_keys_copy = copy.deepcopy(first_keys)
+    second_keys_copy = copy.deepcopy(second_keys)
+    all_keys.extend(second_keys_copy)
+    all_keys.sort()
+    equal_keys = []
+
+    for key in first_keys_copy:
+        if key in second_keys:
+            if first_dict[key] == second_dict[key]:
+                equal_keys.append(key)
+                first_keys.remove(key)
+                second_keys.remove(key)
+                all_keys.remove(key)
+            else:
+                all_keys.remove(key)
+    return all_keys, first_keys, second_keys, equal_keys
+
+
+def gendiff_json(first_file, second_file):
 
     first_file_data = json.load(open(first_file))
     second_file_data = json.load(open(second_file))
 
-    first_keys = list(first_file_data.keys())
-    second_keys = list(second_file_data.keys())
-    first_keys_copy = copy.deepcopy(first_keys)
-    first_keys_copy_ = copy.deepcopy(first_keys)
-    second_keys_copy = copy.deepcopy(second_keys)
-    first_keys_copy.extend(second_keys_copy)
-    first_keys_copy.sort()
-    equal_keys = []
-
-    for key in first_keys_copy_:
-        if key in second_keys:
-            if first_file_data[key] == second_file_data[key]:
-                equal_keys.append(key)
-                first_keys.remove(key)
-                second_keys.remove(key)
-                first_keys_copy.remove(key)
-            else:
-                first_keys_copy.remove(key)
+    verbs = key_sorting(first_file_data, second_file_data)
+    all_keys, first_keys, second_keys, equal_keys = verbs
 
     output = '{\n'
-    for k in first_keys_copy:
+    for k in all_keys:
         if k in first_keys:
             output += f"  - {k} : {first_file_data[k]}\n"
         if k in second_keys:
