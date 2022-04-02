@@ -14,7 +14,7 @@ def key_sorting(first_dict, second_dict):
     equal_keys = []
 
     for key in first_keys_copy:
-        if key in second_keys:
+        if key in second_keys_copy:
             if first_dict[key] == second_dict[key]:
                 equal_keys.append(key)
                 first_keys.remove(key)
@@ -25,20 +25,26 @@ def key_sorting(first_dict, second_dict):
     return all_keys, first_keys, second_keys, equal_keys
 
 
+def print_gendiff(sorted_keys, first_dict, second_dict):
+    all_keys, first_keys, second_keys, equal_keys = sorted_keys
+
+    output_string = '{\n'
+    for key in all_keys:
+        if key in first_keys:
+            output_string += f"  - {key} : {first_dict[key]}\n"
+        if key in second_keys:
+            output_string += f"  + {key} : {second_dict[key]}\n"
+        if key in equal_keys:
+            output_string += f"    {key} : {first_dict[key]}\n"
+    output_string += '}'
+    return output_string
+
+
 def gendiff_json(first_file, second_file):
 
     first_file_data = json.load(open(first_file))
     second_file_data = json.load(open(second_file))
 
-    verbs = key_sorting(first_file_data, second_file_data)
-    all_keys, first_keys, second_keys, equal_keys = verbs
+    sorted_keys = key_sorting(first_file_data, second_file_data)
 
-    output = '{\n'
-    for k in all_keys:
-        if k in first_keys:
-            output += f"  - {k} : {first_file_data[k]}\n"
-        if k in second_keys:
-            output += f"  + {k} : {second_file_data[k]}\n"
-        if k in equal_keys:
-            output += f"    {k} : {first_file_data[k]}\n"
-    return output + '}'
+    return print_gendiff(sorted_keys, first_file_data, second_file_data)
