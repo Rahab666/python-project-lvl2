@@ -31,16 +31,16 @@ def print_gendiff(sorted_keys, first_dict, second_dict):
     output_string = '{\n'
     for key in all_keys:
         if key in first_keys:
-            output_string += f"  - {key} : {first_dict[key]}\n"
+            output_string += f"  - {key}: {first_dict[key]}\n"
         if key in second_keys:
-            output_string += f"  + {key} : {second_dict[key]}\n"
+            output_string += f"  + {key}: {second_dict[key]}\n"
         if key in equal_keys:
-            output_string += f"    {key} : {first_dict[key]}\n"
+            output_string += f"    {key}: {first_dict[key]}\n"
     output_string += '}'
     return output_string
 
 
-def gendiff_json(first_file, second_file):
+def generate_diff(first_file, second_file):
 
     first_file_data = json.load(open(first_file))
     second_file_data = json.load(open(second_file))

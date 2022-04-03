@@ -2,7 +2,7 @@
 name = "hexlet-code"
 version = "0.1.0"
 description = ""
-authors = ["rahab666 <marsdoghelena@gmail.com>"]
+authors = ["sudobooo <marsdoghelena@gmail.com>"]
 packages = [
   { include = "gendiff" },
 ]
@@ -12,9 +12,11 @@ python = "^3.8"
 
 [tool.poetry.dev-dependencies]
 flake8 = "^4.0.1"
+pytest = "^7.1.1"
+pytest-cov = "^3.0.0"
 
 [tool.poetry.scripts]
-gendiff = "gendiff.scripts.gendiff:generate_diff"
+gendiff = "gendiff.scripts.gendiff:main"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
