@@ -1,5 +1,5 @@
-from gendiff.generator import generate_diff
-import tests.output_json as output
+from gendiff.check_differences import generate_diff
+import tests.outputs.output_json as output
 
 
 def test_gendiff():
