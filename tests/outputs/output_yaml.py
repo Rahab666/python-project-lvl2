@@ -2,7 +2,7 @@
 
 """Expected results constants."""
 
-RIGHT_YAML = '''{
+RIGHT = '''{
   - follow: False
     host: hexlet.io
   - proxy: 123.234.53.22
@@ -11,11 +11,11 @@ RIGHT_YAML = '''{
   + verbose: True
 }'''
 
-WRONG_YAML_1 = '{- follow: False host: hexlet.io - proxy: 123.234.53.22'
-WRONG_YAML_2 = '- timeout: 50 + timeout: 20 + verbose: True}'
-WRONG_YAML = WRONG_YAML_1 + WRONG_YAML_2
+WRONG1_1 = '{- follow: False host: hexlet.io - proxy: 123.234.53.22'
+WRONG1_2 = '- timeout: 50 + timeout: 20 + verbose: True}'
+WRONG1 = WRONG1_1 + WRONG1_2
 
-WRONG1_YAML = '''{
+WRONG2 = '''{
   - follow: False
   - proxy: 123.234.53.22
   - timeout: 50
@@ -23,3 +23,9 @@ WRONG1_YAML = '''{
   + timeout: 20
   + verbose: True
 }'''
+
+RIGHT1 = {"host": "hexlet.io",
+          "timeout": 50,
+          "proxy": "123.234.53.22",
+          "follow": False
+          }

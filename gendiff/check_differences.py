@@ -1,5 +1,5 @@
-import json
 import copy
+from gendiff.parsing import parse_file
 
 
 def key_sorting(first_dict, second_dict):
@@ -42,8 +42,8 @@ def print_gendiff(sorted_keys, first_dict, second_dict):
 
 def generate_diff(first_file, second_file):
 
-    first_file_data = json.load(open(first_file))
-    second_file_data = json.load(open(second_file))
+    first_file_data = parse_file(first_file)
+    second_file_data = parse_file(second_file)
 
     sorted_keys = key_sorting(first_file_data, second_file_data)
 
