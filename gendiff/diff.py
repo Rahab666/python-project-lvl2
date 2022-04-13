@@ -1,24 +1,31 @@
-import copy
+def keys_dict(items):
+    keys = []
+
+    def key_append(node):
+        for key, value in node.items():
+            if isinstance(value, dict):
+                keys.append(key)
+                key_append(value)
+            else:
+                keys.append(key)
+        return keys
+    return key_append(items)
 
 
-def key_sorting(first_dict, second_dict):
+def keys_sorting(first_dict, second_dict):
 
-    first_keys = list(first_dict.keys())
-    second_keys = list(second_dict.keys())
-    all_keys = copy.deepcopy(first_keys)
-    first_keys_copy = copy.deepcopy(first_keys)
-    second_keys_copy = copy.deepcopy(second_keys)
-    all_keys.extend(second_keys_copy)
-    all_keys.sort()
+    first_keys = keys_dict(first_dict)
+    second_keys = keys_dict(second_dict)
     equal_keys = []
 
-    for key in first_keys_copy:
-        if key in second_keys_copy:
-            if first_dict[key] == second_dict[key]:
-                equal_keys.append(key)
-                first_keys.remove(key)
-                second_keys.remove(key)
-                all_keys.remove(key)
+    def sort_(first_node, second_node):
+        for key in first_node.keys():
+            if not isinstance(first_node.get(key), dict):
+                if first_node.get(key) == second_node.get(key):
+                    equal_keys.append(key)
+                    first_keys.remove(key)
+                    second_keys.remove(key)
             else:
-                all_keys.remove(key)
-    return all_keys, first_keys, second_keys, equal_keys
+                sort_(first_node[key], second_node[key])
+        return first_keys, second_keys, equal_keys
+    return sort_(first_dict, second_dict)
