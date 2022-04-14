@@ -9,12 +9,12 @@ RIGHT_PARSING = {"host": "hexlet.io",
                  }
 
 RIGHT_PLAIN = '''{
-  - follow: False
+  - follow: false
     host: hexlet.io
   - proxy: 123.234.53.22
   - timeout: 50
   + timeout: 20
-  + verbose: True
+  + verbose: true
 }'''
 
 RIGHT_NEST = '''{
@@ -30,7 +30,7 @@ RIGHT_NEST = '''{
         }
         setting6: {
             doge: {
-              - wow:
+              - wow: 
               + wow: so much
             }
             key: value

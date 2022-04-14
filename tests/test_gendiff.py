@@ -32,6 +32,6 @@ def test_gendiff_json_nest():
 
 
 def test_gendiff_yaml_nest():
-    result = generate_diff('./tests/fixtures/json/file1_nest.json',
-                           './tests/fixtures/json/file2_nest.json')
+    result = generate_diff('./tests/fixtures/yaml/filepath1_nest.yml',
+                           './tests/fixtures/yaml/filepath2_nest.yml')
     assert result == output.RIGHT_NEST

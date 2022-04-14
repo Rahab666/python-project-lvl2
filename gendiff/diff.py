@@ -1,31 +1,37 @@
-def keys_dict(items):
-    keys = []
-
-    def key_append(node):
-        for key, value in node.items():
-            if isinstance(value, dict):
-                keys.append(key)
-                key_append(value)
-            else:
-                keys.append(key)
-        return keys
-    return key_append(items)
+from gendiff.const import ADDED, DELETED, NESTED, UNCHANGED
 
 
-def keys_sorting(first_dict, second_dict):
+def find_diff(fisrt_dict, second_dict):
 
-    first_keys = keys_dict(first_dict)
-    second_keys = keys_dict(second_dict)
-    equal_keys = []
+    first_keys = fisrt_dict.keys()
+    second_keys = second_dict.keys()
+    all_keys = first_keys | second_keys
+    tree = []
 
-    def sort_(first_node, second_node):
-        for key in first_node.keys():
-            if not isinstance(first_node.get(key), dict):
-                if first_node.get(key) == second_node.get(key):
-                    equal_keys.append(key)
-                    first_keys.remove(key)
-                    second_keys.remove(key)
-            else:
-                sort_(first_node[key], second_node[key])
-        return first_keys, second_keys, equal_keys
-    return sort_(first_dict, second_dict)
+    for key in sorted(all_keys):
+        if key not in fisrt_dict:
+            ast = {'type': ADDED, 'key': key,
+                   'first_value': second_dict.get(key)
+                   }
+        elif key not in second_dict:
+            ast = {'type': DELETED, 'key': key,
+                   'first_value': fisrt_dict.get(key)
+                   }
+        elif fisrt_dict.get(key) == second_dict.get(key):
+            ast = {'type': UNCHANGED, 'key': key,
+                   'first_value': fisrt_dict.get(key)
+                   }
+        elif isinstance(
+            fisrt_dict.get(key), dict) and isinstance(
+                second_dict.get(key), dict):
+            ast = {'type': NESTED, 'key': key,
+                   'nested': find_diff(fisrt_dict.get(key),
+                                       second_dict.get(key)
+                                       )}
+        else:
+            ast = {'key': key,
+                   'first_value': fisrt_dict.get(key),
+                   'second_value': second_dict.get(key)
+                   }
+        tree.append(ast)
+    return tree
