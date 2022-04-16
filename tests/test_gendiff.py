@@ -13,25 +13,56 @@ def test_parsing_json():
     assert result == output.RIGHT_PARSING
 
 
-def test_gendiff_yaml_plain():
+def test_format():
+    result = generate_diff('./tests/fixtures/yaml/filepath1_plain.yml',
+                           './tests/fixtures/yaml/filepath2_plain.yml',
+                           'wrong_format')
+    assert result == output.FALSE_FORMAT
+
+
+def test_default():
     result = generate_diff('./tests/fixtures/yaml/filepath1_plain.yml',
                            './tests/fixtures/yaml/filepath2_plain.yml')
-    assert result == output.RIGHT_PLAIN
+    assert result == output.RIGHT_SIMPLE
+
+
+def test_gendiff_yaml_simple():
+    result = generate_diff('./tests/fixtures/yaml/filepath1_plain.yml',
+                           './tests/fixtures/yaml/filepath2_plain.yml',
+                           'stylish')
+    assert result == output.RIGHT_SIMPLE
+
+
+def test_gendiff_json_simple():
+    result = generate_diff('./tests/fixtures/json/file1_plain.json',
+                           './tests/fixtures/json/file2_plain.json',
+                           'stylish')
+    assert result == output.RIGHT_SIMPLE
+
+
+def test_gendiff_json_stylish():
+    result = generate_diff('./tests/fixtures/json/file1_nest.json',
+                           './tests/fixtures/json/file2_nest.json',
+                           'stylish')
+    assert result == output.RIGHT_STYLISH
+
+
+def test_gendiff_yaml_stylish():
+    result = generate_diff('./tests/fixtures/yaml/filepath1_nest.yml',
+                           './tests/fixtures/yaml/filepath2_nest.yml',
+                           'stylish')
+    assert result == output.RIGHT_STYLISH
 
 
 def test_gendiff_json_plain():
-    result = generate_diff('./tests/fixtures/json/file1_plain.json',
-                           './tests/fixtures/json/file2_plain.json')
+    result = generate_diff('./tests/fixtures/json/file1_nest.json',
+                           './tests/fixtures/json/file2_nest.json',
+                           'plain')
     assert result == output.RIGHT_PLAIN
 
 
-def test_gendiff_json_nest():
-    result = generate_diff('./tests/fixtures/json/file1_nest.json',
-                           './tests/fixtures/json/file2_nest.json')
-    assert result == output.RIGHT_NEST
-
-
-def test_gendiff_yaml_nest():
+def test_gendiff_yaml_plain():
     result = generate_diff('./tests/fixtures/yaml/filepath1_nest.yml',
-                           './tests/fixtures/yaml/filepath2_nest.yml')
-    assert result == output.RIGHT_NEST
+                           './tests/fixtures/yaml/filepath2_nest.yml',
+                           'plain')
+    assert result == output.RIGHT_PLAIN

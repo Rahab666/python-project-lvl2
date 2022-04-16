@@ -1,7 +1,12 @@
 import json
 
-from gendiff.const import (DELETED, ADDED, NESTED, NEW, NOCHANGE,
-                           NUMBER_OF_SPACES, OLD, SPACE, UNCHANGED, TEMPLATE)
+from gendiff.const import (
+    DELETED, ADDED,
+    NESTED, NEW,
+    NOCHANGE, NUMBER_OF_SPACES,
+    OLD, SPACE,
+    UNCHANGED, TEMPLATE_STYLISH
+)
 
 
 def print_stylish(tree, depth=1):
@@ -17,31 +22,31 @@ def print_stylish(tree, depth=1):
         complex = item.get('nested')
 
         if type_node == DELETED:
-            output.append(TEMPLATE.format(
+            output.append(TEMPLATE_STYLISH.format(
                 start_space, OLD, key,
                 get_value(first_value, depth + 1)
             ))
         elif type_node == ADDED:
-            output.append(TEMPLATE.format(
+            output.append(TEMPLATE_STYLISH.format(
                 start_space, NEW, key,
-                get_value(first_value, depth + 1)
+                get_value(second_value, depth + 1)
             ))
         elif type_node == UNCHANGED:
-            output.append(TEMPLATE.format(
+            output.append(TEMPLATE_STYLISH.format(
                 start_space, NOCHANGE, key,
                 get_value(first_value, depth + 1)
             ))
         elif type_node == NESTED:
-            output.append(TEMPLATE.format(
+            output.append(TEMPLATE_STYLISH.format(
                 start_space, NOCHANGE, key,
                 print_stylish(complex, depth + 1)
             ))
         else:
-            output.append(TEMPLATE.format(
+            output.append(TEMPLATE_STYLISH.format(
                 start_space, OLD, key,
                 get_value(first_value, depth + 1)
             ))
-            output.append(TEMPLATE.format(
+            output.append(TEMPLATE_STYLISH.format(
                 start_space, NEW, key,
                 get_value(second_value, depth + 1)
             ))
@@ -67,14 +72,14 @@ def get_value(leaf, depth):
     if isinstance(leaf, dict):
         result.append('{')
         for key, value in leaf.items():
-            result.append(TEMPLATE.format(
+            result.append(TEMPLATE_STYLISH.format(
                 start_space, NOCHANGE,
                 key, get_value(value, depth + 1)
             ))
 
         result.append(end_space + '}')
     elif isinstance(leaf, str):
-        result.append(str(leaf))
+        result.append(leaf)
     else:
         result.append(json.dumps(leaf))
     return '\n'.join(result)

@@ -1,4 +1,10 @@
-from gendiff.const import ADDED, DELETED, NESTED, UNCHANGED
+from gendiff.const import (
+    ADDED,
+    DELETED,
+    NESTED,
+    UNCHANGED,
+    CHANGED
+)
 
 
 def find_diff(fisrt_dict, second_dict):
@@ -11,7 +17,7 @@ def find_diff(fisrt_dict, second_dict):
     for key in sorted(all_keys):
         if key not in fisrt_dict:
             ast = {'type': ADDED, 'key': key,
-                   'first_value': second_dict.get(key)
+                   'second_value': second_dict.get(key)
                    }
         elif key not in second_dict:
             ast = {'type': DELETED, 'key': key,
@@ -29,7 +35,7 @@ def find_diff(fisrt_dict, second_dict):
                                        second_dict.get(key)
                                        )}
         else:
-            ast = {'key': key,
+            ast = {'type': CHANGED, 'key': key,
                    'first_value': fisrt_dict.get(key),
                    'second_value': second_dict.get(key)
                    }
