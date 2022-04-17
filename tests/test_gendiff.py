@@ -2,7 +2,7 @@
 
 from gendiff.check_differences import generate_diff
 
-import output
+from tests.fixtures import output
 
 from gendiff.parsing import parse_file
 
