@@ -1,11 +1,16 @@
 [tool.poetry]
-name = "hexlet-code"
+name = "python-project-lvl2-by-sudobooo"
 version = "0.1.0"
-description = ""
+description = "Shows differences between two files"
 authors = ["sudobooo <marsdoghelena@gmail.com>"]
 packages = [
   { include = "gendiff" },
 ]
+classifiers = [
+    "Topic :: Education",
+    "Programming Language :: Python :: 3.8"
+]
+repository = "https://github.com/sudobooo/python-project-lvl2"
 
 [tool.poetry.dependencies]
 python = "^3.8"
