@@ -74,4 +74,121 @@ Property 'group1.nest' was updated. From [complex value] to 'str'
 Property 'group2' was removed
 Property 'group3' was added with value: [complex value]'''
 
+RIGHT_JSON = '''[
+  {
+    "type": "nested",
+    "key": "common",
+    "nested": [
+      {
+        "type": "added",
+        "key": "follow",
+        "second_value": false
+      },
+      {
+        "type": "unchanged",
+        "key": "setting1",
+        "first_value": "Value 1"
+      },
+      {
+        "type": "deleted",
+        "key": "setting2",
+        "first_value": 200
+      },
+      {
+        "type": "changed",
+        "key": "setting3",
+        "first_value": true,
+        "second_value": null
+      },
+      {
+        "type": "added",
+        "key": "setting4",
+        "second_value": "blah blah"
+      },
+      {
+        "type": "added",
+        "key": "setting5",
+        "second_value": {
+          "key5": "value5"
+        }
+      },
+      {
+        "type": "nested",
+        "key": "setting6",
+        "nested": [
+          {
+            "type": "nested",
+            "key": "doge",
+            "nested": [
+              {
+                "type": "changed",
+                "key": "wow",
+                "first_value": "",
+                "second_value": "so much"
+              }
+            ]
+          },
+          {
+            "type": "unchanged",
+            "key": "key",
+            "first_value": "value"
+          },
+          {
+            "type": "added",
+            "key": "ops",
+            "second_value": "vops"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "nested",
+    "key": "group1",
+    "nested": [
+      {
+        "type": "changed",
+        "key": "baz",
+        "first_value": "bas",
+        "second_value": "bars"
+      },
+      {
+        "type": "unchanged",
+        "key": "foo",
+        "first_value": "bar"
+      },
+      {
+        "type": "changed",
+        "key": "nest",
+        "first_value": {
+          "key": "value"
+        },
+        "second_value": "str"
+      }
+    ]
+  },
+  {
+    "type": "deleted",
+    "key": "group2",
+    "first_value": {
+      "abc": 12345,
+      "deep": {
+        "id": 45
+      }
+    }
+  },
+  {
+    "type": "added",
+    "key": "group3",
+    "second_value": {
+      "deep": {
+        "id": {
+          "number": 45
+        }
+      },
+      "fee": 100500
+    }
+  }
+]'''
+
 FALSE_FORMAT = 'The format is not supported'

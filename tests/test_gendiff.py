@@ -66,3 +66,17 @@ def test_gendiff_yaml_plain():
                            './tests/fixtures/yaml/filepath2_nest.yml',
                            'plain')
     assert result == output.RIGHT_PLAIN
+
+
+def test_gendiff_json_json():
+    result = generate_diff('./tests/fixtures/json/file1_nest.json',
+                           './tests/fixtures/json/file2_nest.json',
+                           'json')
+    assert result == output.RIGHT_JSON
+
+
+def test_gendiff_yaml_json():
+    result = generate_diff('./tests/fixtures/yaml/filepath1_nest.yml',
+                           './tests/fixtures/yaml/filepath2_nest.yml',
+                           'json')
+    assert result == output.RIGHT_JSON
