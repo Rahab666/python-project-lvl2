@@ -58,7 +58,7 @@ RIGHT_STYLISH = '''{
         }
         fee: 100500
     }
-}'''
+}'''   # noqa: W291
 
 RIGHT_PLAIN = '''Property 'common.follow' was added with value: false
 Property 'common.setting2' was removed
