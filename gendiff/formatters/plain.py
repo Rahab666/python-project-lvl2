@@ -1,20 +1,28 @@
+"""Function for displaying differences in a plain format"""
+
 import json
 
-from gendiff.const import (
+from gendiff.consts import (
     DELETED,
     ADDED,
     NESTED,
-    CHANGED,
-    TEMPLATE_ADDED,
-    TEMPLATE_REMOVED,
-    TEMPLATE_UPDATED
+    CHANGED
 )
 
+TEMPLATE_ADDED = "Property '{0}' was added with value: {1}"
+TEMPLATE_REMOVED = "Property '{0}' was removed"
+TEMPLATE_UPDATED = "Property '{0}' was updated. From {1} to {2}"
 
-def print_plain(tree, path=[]):
+
+def format(tree, path=[]):
+    """
+    Difference output in plain format.
+    The argument tree is difference tree of two files.
+    The argument path is the path to the value.
+    Returns a list where all differences are described.
+    """
 
     output = []
-
     for item in tree:
         type_node = item.get('type')
         key = item.get('key')
@@ -24,24 +32,27 @@ def print_plain(tree, path=[]):
 
         path.append(key)
 
-        if type_node == DELETED:
+        if type_node is DELETED:
             output.append(TEMPLATE_REMOVED.format('.'.join(path)))
-        elif type_node == ADDED:
+        elif type_node is ADDED:
             output.append(TEMPLATE_ADDED.format('.'.join(path),
                                                 get_value(second_value)))
 
-        elif type_node == CHANGED:
+        elif type_node is CHANGED:
             output.append(TEMPLATE_UPDATED.format('.'.join(path),
                                                   get_value(first_value),
                                                   get_value(second_value)))
-        elif type_node == NESTED:
-            output.append(print_plain(complex, path))
+        elif type_node is NESTED:
+            output.append(format(complex, path))
         path.pop()
 
     return '\n'.join(output)
 
 
 def get_value(value):
+    """
+    Converting the value to the desired format.
+    """
 
     if isinstance(value, str):
         result = f"'{value}'"

@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """Expected results constants."""
 
 RIGHT_PARSING = {"host": "hexlet.io",

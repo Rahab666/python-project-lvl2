@@ -1,5 +1,9 @@
+"""Gendiff tests"""
+
 from gendiff.check_differences import generate_diff
-import tests.outputs.output as output
+
+import output
+
 from gendiff.parsing import parse_file
 
 

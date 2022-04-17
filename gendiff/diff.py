@@ -1,4 +1,6 @@
-from gendiff.const import (
+"""Finding differences between two dictionaries."""
+
+from gendiff.consts import (
     ADDED,
     DELETED,
     NESTED,
@@ -8,6 +10,12 @@ from gendiff.const import (
 
 
 def find_diff(fisrt_dict, second_dict):
+    """
+    Takes two dictionaries as arguments and finds differences between them.
+    The argument first_dict is first dictionary.
+    The argument second_dict is second dictionary.
+    Returns a tree of differences.
+    """
 
     first_keys = fisrt_dict.keys()
     second_keys = second_dict.keys()
