@@ -7,7 +7,7 @@ from gendiff.formatters import format_selection
 from gendiff.diff import find_diff
 
 
-def generate_diff(first_file, second_file, format_name):
+def generate_diff(first_file, second_file, format_name='stylish'):
     """
     Checking and generating differences between two files.
     The argument first_file is path to first file.
