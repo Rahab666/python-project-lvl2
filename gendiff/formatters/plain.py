@@ -36,12 +36,12 @@ def format(tree, path=[]):
             output.append(TEMPLATE_REMOVED.format('.'.join(path)))
         elif type_node is ADDED:
             output.append(TEMPLATE_ADDED.format('.'.join(path),
-                                                get_value(second_value)))
+                                                to_string(second_value)))
 
         elif type_node is CHANGED:
             output.append(TEMPLATE_UPDATED.format('.'.join(path),
-                                                  get_value(first_value),
-                                                  get_value(second_value)))
+                                                  to_string(first_value),
+                                                  to_string(second_value)))
         elif type_node is NESTED:
             output.append(format(complex, path))
         path.pop()
@@ -49,7 +49,7 @@ def format(tree, path=[]):
     return '\n'.join(output)
 
 
-def get_value(value):
+def to_string(value):
     """
     Converting the value to the desired format.
     """

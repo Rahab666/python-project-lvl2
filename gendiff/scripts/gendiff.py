@@ -2,7 +2,7 @@
 
 """Gendiff script."""
 
-import argparse
+from gendiff.parsing import cli_parse
 
 from gendiff import generate_diff
 
@@ -10,15 +10,9 @@ from gendiff import generate_diff
 def main():
     """Print differences between two files."""
 
-    parser = argparse.ArgumentParser(description='Generate diff')
-    parser.add_argument('first_file', metavar='first_file', type=str)
-    parser.add_argument('second_file', metavar='second_file', type=str)
-    parser.add_argument('-f', '--format',
-                        help='set format of output',
-                        default='stylish')
-    args = parser.parse_args()
-
-    print(generate_diff(args.first_file, args.second_file, args.format))
+    print(generate_diff(cli_parse.first_file,
+                        cli_parse.second_file,
+                        cli_parse.format))
 
 
 if __name__ == '__main__':

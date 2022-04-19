@@ -39,17 +39,17 @@ def format(tree, depth=1):
         if type_node is DELETED:
             output.append(TEMPLATE_STYLISH.format(
                 start_space, OLD, key,
-                get_value(first_value, depth + 1)
+                to_string(first_value, depth + 1)
             ))
         elif type_node is ADDED:
             output.append(TEMPLATE_STYLISH.format(
                 start_space, NEW, key,
-                get_value(second_value, depth + 1)
+                to_string(second_value, depth + 1)
             ))
         elif type_node is UNCHANGED:
             output.append(TEMPLATE_STYLISH.format(
                 start_space, NOCHANGE, key,
-                get_value(first_value, depth + 1)
+                to_string(first_value, depth + 1)
             ))
         elif type_node is NESTED:
             output.append(TEMPLATE_STYLISH.format(
@@ -59,11 +59,11 @@ def format(tree, depth=1):
         else:
             output.append(TEMPLATE_STYLISH.format(
                 start_space, OLD, key,
-                get_value(first_value, depth + 1)
+                to_string(first_value, depth + 1)
             ))
             output.append(TEMPLATE_STYLISH.format(
                 start_space, NEW, key,
-                get_value(second_value, depth + 1)
+                to_string(second_value, depth + 1)
             ))
 
     output.append(end_space + '}')
@@ -81,7 +81,7 @@ def calculate_space(depth):
     return space
 
 
-def get_value(value, depth):
+def to_string(value, depth):
     """
     Checks if the value is complex.
     Converts the value to the desired output format.
@@ -96,7 +96,7 @@ def get_value(value, depth):
         for key, leaf_value in value.items():
             result.append(TEMPLATE_STYLISH.format(
                 start_space, NOCHANGE,
-                key, get_value(leaf_value, depth + 1)
+                key, to_string(leaf_value, depth + 1)
             ))
 
         result.append(end_space + '}')

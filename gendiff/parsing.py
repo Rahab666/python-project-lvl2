@@ -1,18 +1,35 @@
-"""A function that converts the data into usable python."""
+"""A functions that converts the data into usable python."""
 
 import json
 
 import yaml
 
+import argparse
 
-def parse_file(file):
+
+def cli_parse():
+    """Parsing CLI arguments."""
+
+    parser = argparse.ArgumentParser(description='Generate diff')
+    parser.add_argument('first_file', metavar='first_file', type=str)
+    parser.add_argument('second_file', metavar='second_file', type=str)
+    parser.add_argument('-f', '--format',
+                        help='set format of output',
+                        default='stylish')
+    args = parser.parse_args()
+    return args
+
+
+def parse(data, format):
     """
-    Checks the file format and returns a dictionary.
+    Accepts data and format.
+    Returns a dictionary.
     """
 
-    if file.endswith('.json'):
-        output_dictionary = json.load(open(file))
-    elif file.endswith('.yaml') or file.endswith('.yml'):
-        output_dictionary = yaml.safe_load(open(file))
+    formats = {
+        'json': json.loads,
+        'yaml': yaml.safe_load,
+        'yml': yaml.safe_load
+    }
 
-    return output_dictionary
+    return formats.get(format)(data)
