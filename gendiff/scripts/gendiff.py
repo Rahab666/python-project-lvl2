@@ -10,9 +10,11 @@ from gendiff import generate_diff
 def main():
     """Print differences between two files."""
 
-    print(generate_diff(cli_parse.first_file,
-                        cli_parse.second_file,
-                        cli_parse.format))
+    args = cli_parse()
+
+    print(generate_diff(args.first_file,
+                        args.second_file,
+                        args.format))
 
 
 if __name__ == '__main__':
