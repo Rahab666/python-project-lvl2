@@ -24,9 +24,7 @@ def generate_diff(first_file, second_file, format_name='stylish'):
     found_diff = find_diff(first_dict, second_dict)
     selected_format = format_selection(format_name)
 
-    if not isinstance(selected_format, str):
-        return selected_format(found_diff)
-    return selected_format
+    return selected_format(found_diff)
 
 
 def read_file(file_name):

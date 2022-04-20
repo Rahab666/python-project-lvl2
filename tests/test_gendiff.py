@@ -10,12 +10,6 @@ from tests.fixtures import output
     (
         './tests/fixtures/yaml/filepath1_plain.yml',
         './tests/fixtures/yaml/filepath2_plain.yml',
-        output.FALSE_FORMAT,
-        'wrong_format'
-    ),
-    (
-        './tests/fixtures/yaml/filepath1_plain.yml',
-        './tests/fixtures/yaml/filepath2_plain.yml',
         output.RIGHT_SIMPLE,
         'stylish'
     ),

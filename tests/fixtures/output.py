@@ -188,5 +188,3 @@ RIGHT_JSON = '''[
     }
   }
 ]'''
-
-FALSE_FORMAT = 'The format is not supported'

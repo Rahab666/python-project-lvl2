@@ -6,9 +6,6 @@ from gendiff.formatters import stylish, plain, json
 def format_selection(format):
     """Selects the output format."""
 
-    if not format:
-        format = 'stylish'
-
     INFERENCE_FORMATS = {
         'stylish': stylish.format,
         'plain': plain.format,
@@ -18,5 +15,5 @@ def format_selection(format):
     output_format = INFERENCE_FORMATS.get(format)
 
     if not output_format:
-        return 'The format is not supported'
+        raise ValueError('The format is not supported')
     return output_format
