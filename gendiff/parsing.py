@@ -11,10 +11,10 @@ def parse(data, format):
     Returns a dictionary.
     """
 
-    formats = {
+    FORMATS = {
         'json': json.loads,
         'yaml': yaml.safe_load,
         'yml': yaml.safe_load
     }
 
-    return formats.get(format)(data)
+    return FORMATS.get(format)(data)
