@@ -3,7 +3,7 @@
 from gendiff import generate_diff
 import pytest
 
-from tests.fixtures import output
+from fixtures import output
 
 
 @pytest.mark.parametrize("first_file, second_file, expected_output, format", [
